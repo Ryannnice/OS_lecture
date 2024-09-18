@@ -1,0 +1,126 @@
+OS Programme Lecture #1  Windows PowerShell Scripting
+
+微软开发，内核编程
+命令行外壳和脚本语言，转为系统管理设计
+Windows Powershell基于.NET框架构建，可以帮助IT专业人员控制和自动化管理操作系统以及在其中运行的应用程序
+PowerShell可以用在多个操作系统：Windows, Linux, and macOS
+
+内核脚本程序的主要三个功能：file manipulation（文件操作）, programme execution（程序执行）, printing text（文本打印）
+注意！shell scripting language是编程语言，在运行时(run-time)被翻译为机器语言；而C、C++等编程语言在编译时(compile-time)被翻译为机器语言
+
+1. 我建议 Visual Studio Code 在Windows系统中使用
+
+2. powershell basics
+>get-help
+>get-command
+>get-command get-*
+>get-command *process
+
+3. bash commands and re-direction:
+>pwd 
+>date
+>cd
+>ls
+>dir
+>dir > filelist.txt
+>cat filelist.txt
+>cp filelist.txt filelist2.txt
+>rm filelist2.txt
+>mv filelist2.txt filelist3.txt   // 重命名 
+>dir
+>dir >> filelist.txt
+>echo 'Welcome to OS lecture'
+>echo 666
+>'Hello World' > fqb.txt  // 重写
+>'Hello' > fqb.txt        // 重写
+>'World' >> fqb.txt       // 添加
+
+4. pipe: |
+>echo 8 5 3 7 | measure-object -sum -max -min -average
+>echo 'Hello World' | measure-object -Property length -sum
+>cat .\filelist.txt | measure-object -Property length -average -sum -max -min
+>'Hello World' | out-file hello.txt
+>'Welcome to OS' | out-file hello.txt -append       // 添加
+>ls | sort
+
+5. variable: $
+>$name="Qinbing Fu"
+>$port=8081
+>$file1="fqb.txt"
+>$file2="fqb2.txt"
+>cp $file1 $file2          // 复制fqb.txt 内容到 fqb2.txt 里面
+>ls
+
+>$today="Thursday"
+>echo 'Today is $today'
+>echo "Today is $today"
+     PS C:\Users\86150\Z_Experiment> echo 'Today is $today'
+Today is $today
+     PS C:\Users\86150\Z_Experiment> echo "Today is $today"
+Today is Thursday
+
+
+
+>$v1="the covid in guangzhou"
+>$v2=$v1
+>echo $v2
+
+6. Arithmetic
+>6/2
+>6/25
+>1+2
+>2*2
+>$x=2
+>$y=4
+>$x+$y
+>$z=$x*$y
+>$z
+>$w=$x/$y
+>$w
+>$v=1,2,3
+>$v
+
+7. Process Management simple
+>get-process
+>get-process -name cmd
+>get-process -name *notepad*
+>stop-process
+>stop-process -name *notepad*
+
+8. Control Structure: if
+
+-eq equal to
+
+-ne not equal to
+
+-lt less than
+
+-le less or equal to
+
+-gt greater than
+
+-ge greater than or equal to
+
+see code in if.ps1
+
+
+9. Control Structure: switch
+see code in switch.ps1
+
+10. Control Structure: while
+see code in while.ps1
+
+11. Control Structure: do until
+see code in until.ps1
+
+12. Control Structures: for, foreach
+see code in for.ps1, foreach.ps1
+
+13. Functions and Arguments
+see code in arguments.ps1
+
+作业 #1：
+用windows shell script编写程序： 从控制台输入两个数，显示他们的整型和
+
+作业 #2：
+用windows shell script编写程序： 编写一个带有控制语句的脚本，从控制台输入一变量，每次加一个常量到此变量，显示每次结果，直到变量大于100并提示到终端

@@ -1,0 +1,131 @@
+OS Programme Lecture #3  Linux Bash Scripting Tutorial
+
+Linux 内核交互、内核编程基础、进程管理、文件系统
+
+1. Bash basics
+$cd
+$pwd
+$date
+$ls
+$ls -l
+$ls | sort
+$ls -l > filelist.txt
+$ls -l >> filelist.txt
+$ls -l | wc -w
+$ls filelist.txt | wc -w
+$ls Documents
+$ls Documents | wc -w
+$cat
+$cp
+$rm
+$mv
+$wc //word count
+$echo hello world!
+$echo *
+$echo **
+$echo ***
+$find *.sh
+$seq 1 10
+$seq 1 2 10
+
+
+2. Bash 执行脚本文件
+创建一个bash脚本文件:
+$touch hello_world.sh
+$vim hello_script.sh （进入编辑，按insert键编辑脚本，完成后shift+;退出，若要保存输入wq!回到控制台，若不保存，输入q!）
+
+shebang，它告诉shell在执行脚本时使用哪个程序来解释脚本。
+#!/bin/bash — Execute the file using bash
+#!/bin/sh — Execute the file using sh, the Bourne shell, or a compatible shell
+#!/bin/csh — Execute the file using csh, the C shell, or a compatible shell
+#!/usr/bin/perl -T — Execute using Perl with the option for taint checks
+#!/usr/bin/php — Execute the file using the PHP command line interpreter
+#!/usr/bin/python -O — Execute using Python with optimizations to code
+#!/usr/bin/ruby — Execute using Ruby
+
+执行bash脚本，有以下方式：
+第一种
+$bash hello_world.sh
+$sh hello_world.sh
+第二种：设置可执行权限，使用chmod +x或者chmod u+x
+u stands for user.
+g stands for group.
+o stands for others.
+a stands for all.
+x stands for executable.
+$chmod u+x hello_world2.sh
+$./hello_world2.sh
+
+
+3. Bash arithmetic
+$expr whatever
+$expr 1+2
+$expr 1 + 2
+$expr 1 - 2
+$expr 1 * 2
+$expr 1 "*" 2
+$expr 2 "*" 2
+
+$let x=666
+$let y=334
+$let z=$x+$y
+$$z
+$echo $z
+$let w=$x/6
+$echo $w
+$let count=2
+$echo $count
+$count=$count+1
+$echo $count
+
+$a=10
+$echo $a
+$b=YES
+$echo $b
+
+4. Bash control structures
+看脚本文件 if.sh, case.sh, while.sh, until.sh, for.sh, arguments.sh, functions.sh
+-eq equal to
+-ne not equal to
+-lt less than
+-le less or equal to
+-gt greater than
+-ge greater than or equal to
+
+$chmod 755 if.sh
+755 means full permissions.
+
+注意：在脚本里，$# 代表 number of arguments passing to the script，$* 代表 all positional arguments.
+
+5. BASH - list and read process information，一个较复杂脚本程序
+保存当前电脑的进程使用情况到一个文本文件，在控制台写入以下命令：
+$top -b > process.txt
+任务 - 写一个脚本ProcessMemoryUsage.sh，以读取process.txt，在控制台输出内存使用大于0的进程
+参考代码:
+filename="process.txt"
+echo "Reading $filename"
+linecounter=0
+while read -r line; do
+	line="$line"
+	let linecounter+=1
+	
+	if [ $linecounter -gt 7 ]; then
+		column=0
+		memsize=""
+
+		for word in $line; do
+			if [ $column -eq 9 ]; then
+				memsize=$word
+				break;
+			fi
+			let column+=1
+		done
+
+		if [ $memsize != "0.0" ]; then
+			echo $line 
+		fi
+	fi
+done < $filename
+
+6. 作业：
+编写脚本在BASH中输出CPU使用率大于0.0%的进程。
